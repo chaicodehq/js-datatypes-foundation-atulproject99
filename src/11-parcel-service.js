@@ -53,20 +53,65 @@
  */
 export function parcelToJSON(parcel) {
   // Your code here
+  //    - JSON.stringify() se parcel object ko JSON string mein convert karo
+  //  *      - try-catch use karo (circular references ke liye)
+  //  *      - Agar parcel undefined hai ya error aaye, return ""
+  //  *      - Example: parcelToJSON({id:"P001", weight:2.5})
+  try {
+    if (parcel === undefined) {
+      return "";
+    }
+    else {
+      return JSON.stringify(parcel);
+    }
+  }
+  catch (e) {
+    return "";
+  }
 }
 
 export function jsonToParcel(jsonString) {
   // Your code here
+  //   *      - JSON.parse() se JSON string ko wapas object mein convert karo
+  //  *      - try-catch use karo (invalid JSON ke liye)
+  //  *      - Agar jsonString string nahi hai ya invalid JSON hai, return null
+  //  *      - Example: jsonToParcel('{"id":"P001","weight":2.5}')
+  //  *                 => {id:"P001", weight:2.5}
+  try {
+    if (typeof jsonString !== 'string') return null;
+    return JSON.parse(jsonString)
+  }
+  catch (e) {
+    return null;
+  }
 }
 
 export function convertToString(value) {
   // Your code here
+  //    *      - String() se kisi bhi value ko string mein convert karo
+  //  *      - Example: convertToString(42) => "42"
+  //  *      - Example: convertToString(true) => "true"
+  //  *      - Example: convertToString(null) => "null"
+  //  *      - Example: convertToString(undefined) => "undefined"
+  return String(value)
 }
 
 export function convertToNumber(value) {
   // Your code here
+  return Number(value)
 }
 
 export function stringToChars(str) {
   // Your code here
+
+  //    *      - Array.from() se string ko characters ki array mein convert karo
+  //  *      - Agar str string nahi hai, return []
+  //  *      - Example: stringToChars("Dak") => ["D", "a", "k"]
+  //  *      - Example: stringToChars("") => []
+  if (typeof str !== 'string') {
+    return []
+  }
+  else {
+    return Array.from(str)
+  }
 }

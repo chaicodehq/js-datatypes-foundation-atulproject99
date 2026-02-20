@@ -47,20 +47,68 @@
  */
 export function repeatPattern(pattern, times) {
   // Your code here
+  let isString = typeof pattern === 'string'
+  let turn = Number(times)
+  if (isString && turn >= 0 && Number.isSafeInteger(turn)) {
+
+    return pattern.repeat(turn);
+  }
+  else {
+    return "";
+  }
 }
 
 export function extractRangoliCenter(design, start, end) {
+  let isString = typeof design === 'string'
   // Your code here
+  if (!isString) {
+    return "";
+  }
+  else {
+    return design.slice(start, end);
+  }
+
 }
 
 export function splitAndJoinRangoli(colorString, oldSep, newSep) {
   // Your code here
+  let isString = typeof colorString === 'string'
+  if (isString) {
+    let splitString = colorString.split(oldSep);
+    return splitString.join(newSep);
+
+  }
+  return "";
 }
 
 export function replaceRangoliColor(design, oldColor, newColor) {
   // Your code here
+  let isString = typeof design === 'string'
+
+  if (isString && typeof oldColor == 'string' && typeof newColor == 'string') {
+    return design.replaceAll(oldColor, newColor);
+  }
+  else {
+    return "";
+  }
+
 }
 
 export function makeRangoliBorder(char, length) {
   // Your code here
+  let isString = typeof char === 'string'
+  if (isString) {
+    let newChar = char.repeat(100);
+    if (length < 0) {
+      return '';
+    }
+    else {
+      return newChar.slice(0, length);
+    }
+
+  }
+  else {
+    return "";
+  }
+
 }

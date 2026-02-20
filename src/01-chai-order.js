@@ -47,20 +47,86 @@
  */
 export function getChaiOrderLength(order) {
   // Your code here
+  if (typeof order !== 'string') {
+    return -1;
+  }
+  else {
+    let finalOrder = order.trim();
+
+    if (finalOrder.length == 0) {
+      return 0;
+    }
+    else {
+      return finalOrder.length;
+    }
+
+  }
+
+
 }
 
 export function shoutChaiOrder(order) {
   // Your code here
+  if (typeof order !== "string") {
+    return "";
+  }
+  else {
+    let finalOrder = order.trim();
+    return finalOrder.toUpperCase()
+  }
 }
 
 export function whisperChaiOrder(order) {
-  // Your code here
+
+  if (typeof order !== 'string') {
+    return "";
+  }
+  else {
+    let finalOrder = order.trim()
+
+    if (finalOrder.length == 0) {
+      return "";
+    }
+    else {
+      return finalOrder.toLowerCase()
+    }
+  }
 }
 
 export function hasSpecialIngredient(order, ingredient) {
-  // Your code here
+  if (typeof order !== 'string' || typeof ingredient != 'string') {
+    return false
+  }
+  else {
+    let finalOrder = order.trim().toLowerCase()
+    let finalIngredient = ingredient.trim().toLowerCase()
+
+    if (finalOrder.length == 0 && finalIngredient.length == 0) {
+      return false;
+    }
+    else if (finalOrder.includes(finalIngredient)) {
+      return true;
+    }
+    else {
+      return false;
+    }
+  }
 }
 
 export function getFirstAndLastChar(order) {
-  // Your code here
+  if (typeof order !== 'string') {
+    return null;
+  }
+  else {
+    let finalOrder = order.trim()
+    if (finalOrder.length == 0) {
+      return null;
+    }
+    else {
+      let firstChar = finalOrder.charAt(0)
+      let lastChar = finalOrder.at(-1)
+      return { 'first': firstChar, "last": lastChar }
+    }
+  }
+
 }

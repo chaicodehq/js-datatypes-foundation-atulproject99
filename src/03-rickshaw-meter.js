@@ -52,20 +52,101 @@
  */
 export function parseFare(fareString) {
   // Your code here
+
+  if (typeof fareString !== 'string') {
+    return -1;
+  }
+  else if (fareString.length < 0) {
+    return -1;
+  }
+
+  else {
+    let finalFare = parseFloat(fareString);
+    if (Number.isNaN(finalFare)) {
+      return -1;
+    }
+    else {
+      return finalFare;
+    }
+  }
+
+
 }
 
 export function roundFare(amount, decimalPlaces) {
+  //    *      - .toFixed(decimalPlaces) se fare round karo
+  //  *      - Result STRING return hota hai (toFixed returns string)
+  //  *      - Agar amount number nahi hai ya decimalPlaces non-negative integer nahi hai, return ""
+  //  *      - Example: roundFare(152.567, 2) => "152.57"
+  //  *      - Example: roundFare(152.567, 0) => "153"
   // Your code here
+
+  if (typeof amount === 'number' && typeof decimalPlaces === 'number' && Number.isSafeInteger(decimalPlaces) && decimalPlaces >= 0) {
+    return amount.toFixed(decimalPlaces);
+  }
+  else {
+    return "";
+  }
+
 }
 
 export function calculateSurge(baseFare, surgeMultiplier) {
   // Your code here
+  //    *      - baseFare * surgeMultiplier karo
+  //  *      - Math.ceil() se always round UP (auto wale ko paisa milna chahiye!)
+  //  *      - Agar baseFare ya surgeMultiplier positive number nahi hai, return 0
+  //  *      - Example: calculateSurge(100, 1.5) => 150
+  //  *      - Example: calculateSurge(73, 1.8) => 132 (Math.ceil(131.4))
+
+
+  if (typeof baseFare === 'number' && typeof surgeMultiplier === 'number' && baseFare >= 0 && surgeMultiplier >= 0) {
+    return Math.ceil((baseFare * surgeMultiplier));
+  }
+  else {
+    return 0;
+  }
+
 }
 
 export function findCheapestAndCostliest(...fares) {
   // Your code here
+  if (fares.length == 0) {
+    return null;
+  }
+  else {
+    const list = fares.filter((e) => typeof e === 'number')
+    if (list.length == 0) {
+      return null;
+    }
+    else {
+      const minValue = Math.min(...list)
+      const maxValue = Math.max(...list)
+
+      return { cheapest: minValue, costliest: maxValue }
+    }
+
+  }
+
 }
 
 export function getDistanceDifference(from, to) {
   // Your code here
+  const finalFrom = from.toString()
+  const finalTo = to.toString()
+
+  if (finalFrom.length == 0 || finalTo.length == 0) {
+    return -1;
+  }
+  else {
+    const sourceDistance = parseInt(finalFrom)
+    const destinationDistance = parseInt(finalTo)
+    const differenceDistance = Math.abs(sourceDistance - destinationDistance);
+    if (Number.isNaN(differenceDistance)) {
+      return -1;
+    }
+    else {
+      return differenceDistance
+    }
+  }
+
 }
