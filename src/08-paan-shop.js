@@ -55,15 +55,12 @@ export function createPaanOrder(basePaan, customizations) {
   //  *                 => {type:"meetha", price:50, extra:"gulkand"}
   //  *
 
-  if (typeof basePaan !== 'object' || basePaan == null) return {};
-  if (typeof customizations !== 'object' || customizations == null) {
-
-    return Object.assign({}, basePaan)
-  }
-  else {
+  if (typeof basePaan !== "object" || basePaan == null) return {};
+  if (typeof customizations !== "object" || customizations == null) {
+    return Object.assign({}, basePaan);
+  } else {
     return Object.assign({}, basePaan, customizations);
   }
-
 }
 
 export function freezeMenu(menu) {
@@ -74,9 +71,8 @@ export function freezeMenu(menu) {
   //  *      - Frozen ke baad koi modification kaam nahi karegi!
   //  *      - Example: const frozen = freezeMenu({meetha:30}); frozen.meetha = 100; // still 30
 
-  if (typeof menu !== 'object' || menu == null) return {};
+  if (typeof menu !== "object" || menu == null) return {};
   return Object.freeze(menu);
-
 }
 
 export function updatePrices(menu, increase) {
@@ -87,9 +83,13 @@ export function updatePrices(menu, increase) {
   //  *      - Return: NEW object (original mat badlo!)
   //  *      - Agar menu object nahi hai ya increase number nahi hai, return {}
   //  *      - Example: updatePrices({meetha:30, saada:20}, 10) => {meetha:40, saada:30}
-  if (typeof menu !== 'object' || menu == null || typeof increase !== 'number') return {};
+  if (typeof menu !== "object" || menu == null || typeof increase !== "number")
+    return {};
   const objectArray = Object.entries(menu);
-  const updatedArray = objectArray.map(([key, value]) => [key, value + increase]);
+  const updatedArray = objectArray.map(([key, value]) => [
+    key,
+    value + increase,
+  ]);
   return Object.fromEntries(updatedArray);
 }
 
@@ -103,8 +103,13 @@ export function mergeDailySpecials(regularMenu, specialsMenu) {
   //  *      - Example: mergeDailySpecials({meetha:30}, {chocolate:60, meetha:40})
   //  *                 => {meetha:40, chocolate:60}
 
-  if (typeof regularMenu !== 'object' && typeof specialsMenu !== 'object' && regularMenu == null && specialsMenu == null) return {}
-  const mergedObject = { ...regularMenu, ...specialsMenu }
-  return mergedObject;
+  const safeRegular =
+    typeof regularMenu === "object" && regularMenu !== null ? regularMenu : {};
 
+  const safeSpecials =
+    typeof specialsMenu === "object" && specialsMenu !== null
+      ? specialsMenu
+      : {};
+
+  return { ...safeRegular, ...safeSpecials };
 }
